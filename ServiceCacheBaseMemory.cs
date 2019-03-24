@@ -165,7 +165,7 @@ namespace thZero.Services
             policy.RemovedCallback = (arguments) =>
             {
                 //// Log these values from arguments list 
-                //String strLog = String.Concat("Reason: ", arguments.RemovedReason.ToString(), " Key-Name: ", arguments.CacheItem.Key, " | Value-Object: ", 
+                //string strLog = String.Concat("Reason: ", arguments.RemovedReason.ToString(), " Key-Name: ", arguments.CacheItem.Key, " | Value-Object: ", 
                 //arguments.CacheItem.Value.ToString()); 
             };
             return policy;
@@ -181,7 +181,7 @@ namespace thZero.Services
             policy.RemovedCallback = (arguments) =>
             {
                 //// Log these values from arguments list 
-                //String strLog = String.Concat("Reason: ", arguments.RemovedReason.ToString(), " Key-Name: ", arguments.CacheItem.Key, " | Value-Object: ", 
+                //string strLog = String.Concat("Reason: ", arguments.RemovedReason.ToString(), " Key-Name: ", arguments.CacheItem.Key, " | Value-Object: ", 
                 //arguments.CacheItem.Value.ToString()); 
             };
             return policy;
