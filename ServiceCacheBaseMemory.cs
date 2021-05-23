@@ -100,7 +100,7 @@ namespace thZero.Services
             if (cache.Contains(key))
                 return (T)cache.Get(key);
 
-            return default(T);
+            return default;
         }
 
         protected override void RemoveCore(string key, string region)
@@ -129,7 +129,7 @@ namespace thZero.Services
             MemoryCache cache = GetCache();
             Enforce.AgainstNull(() => cache);
 
-            Dictionary<string, long> list = new Dictionary<string, long>();
+            Dictionary<string, long> list = new();
 
             string region = string.Empty;
             string[] values;
@@ -159,8 +159,10 @@ namespace thZero.Services
             if (string.IsNullOrEmpty(region))
                 region = RegionKeyNone;
 
-            CacheItemPolicy policy = new CacheItemPolicy();
-            policy.SlidingExpiration = new TimeSpan(12, 0, 0);
+            CacheItemPolicy policy = new()
+            {
+                SlidingExpiration = new TimeSpan(12, 0, 0)
+            };
             policy.ChangeMonitors.Add(new SignaledChangeMonitor(region));
             policy.RemovedCallback = (arguments) =>
             {
@@ -175,7 +177,7 @@ namespace thZero.Services
             if (string.IsNullOrEmpty(region))
                 region = RegionKeyNone;
 
-            CacheItemPolicy policy = new CacheItemPolicy();
+            CacheItemPolicy policy = new();
             policy.AbsoluteExpiration = MemoryCache.InfiniteAbsoluteExpiration;
             policy.ChangeMonitors.Add(new SignaledChangeMonitor(region));
             policy.RemovedCallback = (arguments) =>
@@ -272,8 +274,8 @@ namespace thZero.Services
             #endregion
 
             #region Fields
-            private string _name;
-            private string _uniqueId = Guid.NewGuid().ToString();//"N", CultureInfo.InvariantCulture);
+            private readonly string _name;
+            private readonly string _uniqueId = Guid.NewGuid().ToString();//"N", CultureInfo.InvariantCulture);
             #endregion
         }
     }

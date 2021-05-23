@@ -111,7 +111,7 @@ namespace thZero.Services
                 }
 
                 if (!execute)
-                    return default(T);
+                    return default;
 
                 bool result = true;
                 bool resultPrimary = true;

@@ -127,7 +127,7 @@ namespace thZero.Services
                 if (cache.Contains(key))
                     return (T)cache.Get(key);
 
-                return default(T);
+                return default;
             });
         }
 
@@ -172,7 +172,7 @@ namespace thZero.Services
                 MemoryCache cache = GetCache();
                 Enforce.AgainstNull(() => cache);
 
-                Dictionary<string, long> list = new Dictionary<string, long>();
+                Dictionary<string, long> list = new();
 
                 string region = string.Empty;
                 string[] values;
@@ -216,7 +216,7 @@ namespace thZero.Services
             if (string.IsNullOrEmpty(region))
                 region = RegionKeyNone;
 
-            CacheItemPolicy policy = new CacheItemPolicy();
+            CacheItemPolicy policy = new();
             policy.SlidingExpiration = new TimeSpan(12, 0, 0);
             policy.ChangeMonitors.Add(new SignaledChangeMonitor(region));
             return policy;
@@ -236,7 +236,7 @@ namespace thZero.Services
 
         #region Fields
         protected MemoryCache _cache;
-        private readonly AsyncReaderWriterLock _lock = new AsyncReaderWriterLock();
+        private readonly AsyncReaderWriterLock _lock = new();
         #endregion
 
         #region Constants
@@ -307,8 +307,8 @@ namespace thZero.Services
             #endregion
 
             #region Fields
-            private string _name;
-            private string _uniqueId = Guid.NewGuid().ToString();//"N", CultureInfo.InvariantCulture);
+            private readonly string _name;
+            private readonly string _uniqueId = Guid.NewGuid().ToString();//"N", CultureInfo.InvariantCulture);
             #endregion
         }
     }

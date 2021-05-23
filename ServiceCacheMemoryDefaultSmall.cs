@@ -60,11 +60,13 @@ namespace thZero.Services
                         //http://www.shujaat.net/2011/03/wpf-configuring-systemruntimecachingmem.html
                         //https://msdn.microsoft.com/en-us/library/dd941872(v=vs.110).aspx
                         // Create a name / value pair for properties
-                        var config = new NameValueCollection();
-                        //config.Add("pollingInterval", "00:02:00");
-                        config.Add("pollingInterval", MemoryCache.Default.PollingInterval.ToString());
-                        config.Add("physicalMemoryLimitPercentage", "33");
-                        config.Add("cacheMemoryLimitMegabytes", "50");
+                        var config = new NameValueCollection
+                        {
+                            //config.Add("pollingInterval", "00:02:00");
+                            { "pollingInterval", MemoryCache.Default.PollingInterval.ToString() },
+                            { "physicalMemoryLimitPercentage", "33" },
+                            { "cacheMemoryLimitMegabytes", "50" }
+                        };
 
                         // instantiate cache
                         _cache = new MemoryCache("CustomCache", config);
@@ -81,7 +83,7 @@ namespace thZero.Services
         #endregion
 
         #region Constants
-        private static readonly object _lock = new object();
+        private static readonly object _lock = new();
         #endregion
     }
 }
